@@ -17,56 +17,80 @@ def main():
     res = list(filter(None, holder))
     checkRow(res)  
     print(len(herd))
+    print(sum(herd))
 
 def checkRow(games):
     # games is one row of data, one game, pull is one pull of dice
     for game in games:
-    
+        #remove blanks
         newGame = list(filter(None, game))
+
+        # assign game id
+        gameIDgroup = newGame[0]
+
+        yars = []
+        for i in range(len(gameIDgroup)):
+            if (gameIDgroup[i].isdigit()):
+                yars.append(gameIDgroup[i])
+        
+        converted_list = map(str, yars)
+        result = ''.join(converted_list)
+        gmIDnum = int(result)
  
-        for i in range(len(newGame)):
-            game_id = newGame[0]
-            check_Group(newGame[i].split())           
+        gameLen = (len(newGame) - 1) 
+        # counter to check for possible games, will check vs gameLen at end
+        checkGL = 0 
+
+        # check each pull for possible or not, parse in next function return 1 or 0 for yes or no eval in next set of code
+        for k in range(len(newGame)):
+            checkGL = (checkGL + check_Group(newGame[k]))
+       
+            # split and send index 
+            # parse yes or no and return int
+        # check sum return int to length game - 1 for yes or no
+        # set gm value to id or zero and send to herd
+        if checkGL == gameLen:
+            herd.append(gmIDnum)
+        else: 
+            herd.append(int(0))
+            print(0)
+
+        # back in main sum herd '''
 
 def check_Group(dice):
+    
+    if (dice[0] == "G"):
+        return 0
+    
+    newDice = dice.split()
+    bl = "blue"
+    gr = "green"
+    rd = "red"
+    numB = ""
+    numG = ""
+    numR = ""
 
-    for i in range(len(dice)): 
-
-        bl = "blue"
-        gr = "green"
-        rd = "red"
-        gm = "Game"
-
-        numB = ""
-        numG = ""
-        numR = ""
-        gameID = ""
-
-        if bl in dice: 
-            x = dice.index(bl) - 1
-            print(x)
-            numB = int(dice[x])
-            print(numB)
+    for i in range(len(newDice)):
+        if bl in newDice: 
+            x = newDice.index(bl) - 1
+            numB = int(newDice[x])
         else:
-            numB = 24
-        
-        if gr in dice:
-            x = dice.index(gr) - 1
-            numG = int(dice[x])
+            numB = 0
+
+        if gr in newDice:
+            x = newDice.index(gr) - 1
+            numG = int(newDice[x])
         else:
-            numG = 24
-        
-        if rd in dice: 
-            x = dice.index(rd) - 1
-            numR = int(dice[x])
+            numG = 0
+
+        if rd in newDice: 
+            x = newDice.index(rd) - 1
+            numR = int(newDice[x])
         else:
-            numR = 24
+            numR = 0
 
     if (numB <= blue) and (numR <= red) and (numG <= green):
-        herd.append("goat")
-        print("Goat")
-
-def findRetColor():
-    
-
+        return 1
+    else:
+        return 0 
 main() 
