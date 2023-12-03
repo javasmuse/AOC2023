@@ -45,10 +45,6 @@ def checkRow(games):
         for k in range(len(newGame)):
             checkGL = (checkGL + check_Group(newGame[k]))
        
-            # split and send index 
-            # parse yes or no and return int
-        # check sum return int to length game - 1 for yes or no
-        # set gm value to id or zero and send to herd
         if checkGL == gameLen:
             herd.append(gmIDnum)
         else: 
@@ -66,29 +62,23 @@ def check_Group(dice):
     bl = "blue"
     gr = "green"
     rd = "red"
-    numB = ""
-    numG = ""
-    numR = ""
+    numB = int(0)
+    numG = int(0)
+    numR = int(0)
+    print(newDice)
+    
+    for d in range(len(newDice)):
+        if newDice[d].isdigit(): 
+            g = d + 1
+            if newDice[g] == "red":
+                numR = int(newDice[d])
+            elif newDice[g] == "blue":
+                numB = int(newDice[d])
+            elif newDice[g] == "green":
+                numG = int(newDice[d])
+            
 
-    for i in range(len(newDice)):
-        if bl in newDice: 
-            x = newDice.index(bl) - 1
-            numB = int(newDice[x])
-        else:
-            numB = 0
-
-        if gr in newDice:
-            x = newDice.index(gr) - 1
-            numG = int(newDice[x])
-        else:
-            numG = 0
-
-        if rd in newDice: 
-            x = newDice.index(rd) - 1
-            numR = int(newDice[x])
-        else:
-            numR = 0
-
+    print(numB, numG, numR)
     if (numB <= blue) and (numR <= red) and (numG <= green):
         return 1
     else:
