@@ -2,18 +2,18 @@ import csv
 
 number_set = []
 
-with open("AdventDay1.csv") as file:
-    reader = csv.reader(file)
+# reads and removes junk from my csv
+with open("DataDogOne.csv") as file:
+    reader = csv.reader(file, delimiter=" ")
     for row in reader:
-        number_set.append(f"{row[1]}")
+        number_set.append(row[0])
 
 # test number set provided answer is 142
 #number_set = ["1abc2", "pqr3stu8vwx", "a1b2c3d4e5f", "treb7uchet"]
-
+print(number_set)
 charlie_hold_numbs = []
 
 def main(): 
-    print(number_set[0], number_set[-1])
     pull_groups(number_set)
     print(totes_charles(charlie_hold_numbs))
 
